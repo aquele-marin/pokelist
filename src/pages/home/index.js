@@ -1,10 +1,12 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 
+import './styles.css';
+
 function Header() {
     return (
-        <div>
-
+        <div className="header">
+            <h1 className="title">PokeList</h1>
         </div>
     )
 }
@@ -32,7 +34,7 @@ function FirstTable(props) {
     }, [pokeListOffset]);
 
     return (
-        <div>
+        <div className="firstTable">
             <table>
                 <tr>
                     <th>Name</th>
@@ -91,7 +93,7 @@ function FirstTable(props) {
 
 function SecondTable(props) {
     return (
-        <div>
+        <div className="secondTable">
             <table>
                 <tr>
                     <th>
@@ -160,7 +162,7 @@ function Body(props) {
     }, []);
 
     return (
-        <div>
+        <div className="body">
             <FirstTable favPokeList={favPokeList} pokeController={pokeController} />
             <SecondTable favPokeList={favPokeList} pokeController={pokeController} />
         </div>
@@ -171,8 +173,11 @@ function Home() {
     return (
       <div>
           <Header />
-          <h2>Sua lista de pokemons</h2>
-          <Body />
+          <h2 className="subtitle" >Sua lista de pokemons</h2>
+          <div>
+            <Body className="corpo"/>
+          </div>
+          
       </div>
     );
   }
