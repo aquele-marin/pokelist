@@ -43,10 +43,10 @@ function App() {
                     <Route exact path="/login">
                         <Login />
                     </Route>
-                    <Route exact path="/">
+                    <Route exact path="/landing">
                         <Landing />
                     </Route>
-                    <PrivateRoute exact path="/home">
+                    <PrivateRoute exact path="/">
                         <Home />
                     </PrivateRoute>
                 </Switch>
