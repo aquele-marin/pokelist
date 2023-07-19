@@ -1,5 +1,5 @@
 import Typography from "@mui/material/Typography";
-import Link from "react-router-dom/Link";
+import Link from "@mui/material/Link";
 
 export function Copyright(props) {
     return (
