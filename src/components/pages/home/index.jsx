@@ -8,10 +8,10 @@ import Header from "./Header";
 export default function Home() {
     return (
         <BrowserRouter>
+            <Route path="/">
+                <Header />
+            </Route>
             <Switch>
-                <Route path="/">
-                    <Header />
-                </Route>
                 <Route exact path="/">
                     <Main />
                 </Route>

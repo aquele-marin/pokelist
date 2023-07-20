@@ -46,7 +46,7 @@ function App() {
                     <Route exact path="/landing">
                         <Landing />
                     </Route>
-                    <PrivateRoute exact path="/">
+                    <PrivateRoute path="/">
                         <Home />
                     </PrivateRoute>
                 </Switch>
