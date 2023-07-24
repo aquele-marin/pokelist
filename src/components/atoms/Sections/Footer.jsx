@@ -8,7 +8,7 @@ import { Copyright } from "../Copyright";
 // TODO remove, this demo shouldn't need to reset the theme.
 const defaultTheme = createTheme();
 
-export function Footer() {
+export function Footer({ children }) {
     return (
         <ThemeProvider theme={defaultTheme}>
             <Box
@@ -18,7 +18,8 @@ export function Footer() {
                     minHeight: "100vh",
                 }}
             >
-                <Container component="main" sx={{ mt: 8, mb: 2 }} maxWidth="sm">
+                {children}
+                {/* <Container component="main" sx={{ mt: 8, mb: 2 }} maxWidth="sm">
                     <Typography variant="h2" component="h1" gutterBottom>
                         Sticky footer
                     </Typography>
@@ -31,8 +32,8 @@ export function Footer() {
                     <Typography variant="body1">
                         Sticky footer placeholder.
                     </Typography>
-                </Container>
-                <Box
+                </Container> */}
+                {/* <Box
                     component="footer"
                     sx={{
                         py: 3,
@@ -50,7 +51,7 @@ export function Footer() {
                         </Typography>
                         <Copyright />
                     </Container>
-                </Box>
+                </Box> */}
             </Box>
         </ThemeProvider>
     );
