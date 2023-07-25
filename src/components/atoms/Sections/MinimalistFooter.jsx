@@ -11,7 +11,7 @@ export function MinimalistFooterComponent({ children }) {
     );
 }
 
-export function Title({ children }) {
+export function MFCTitle({ children }) {
     return (
         <Typography variant="h6" align="center" gutterBottom>
             {children}
@@ -19,7 +19,7 @@ export function Title({ children }) {
     );
 }
 
-export function Description({ children }) {
+export function MFCDescription({ children }) {
     return (
         <Typography
             variant="subtitle1"
