@@ -1,16 +1,19 @@
-import { Footer } from "../../atoms/Sections";
-import { MinimalistFooter } from "../../atoms/Sections/MinimalistFooter";
+import { MinimalistFooter } from "../../atoms/Sections";
 import Album from "./Album";
 export default function Landing() {
     return (
         <>
             <Album />
-            <Footer>
-                <MinimalistFooter
+            {/* <MinimalistFooter
                     title="Footer"
                     description="Texto do footer"
-                />
-            </Footer>
+                /> */}
+            <MinimalistFooter.component>
+                <MinimalistFooter.title>Footer</MinimalistFooter.title>
+                <MinimalistFooter.description>
+                    Texto do footer
+                </MinimalistFooter.description>
+            </MinimalistFooter.component>
         </>
     );
 }
