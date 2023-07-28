@@ -41,7 +41,7 @@ const queryClient = new QueryClient({
 function Home() {
     return (
         <QueryClientProvider client={queryClient}>
-            <Box className="bg-blue-700 h-full">
+            <Box className="h-full">
                 <Header />
                 <Routes>
                     <Route path="/" element={<Main />} />

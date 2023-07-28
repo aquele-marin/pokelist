@@ -43,14 +43,10 @@ export function Main() {
                     Confira seus pokemons favoritos e suas informações!! Entre
                     na aba Pokedex para favoritar e visualizar novos pokemons!
                 </HeroSection.Description>
-                {/* <HeroSection.Buttons>
-                    <Button variant="contained">Main call to action</Button>
-                    <Button variant="outlined">Secondary action</Button>
-                </HeroSection.Buttons> */}
             </HeroSection.Component>
             <Divider />
             <Typography
-                className="flex justify-center bg-pink-300"
+                className="flex justify-center"
                 variant="h2"
                 component="h2"
             >
