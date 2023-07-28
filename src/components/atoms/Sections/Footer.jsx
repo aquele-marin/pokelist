@@ -8,16 +8,10 @@ import { Copyright } from "../Copyright";
 // TODO remove, this demo shouldn't need to reset the theme.
 const defaultTheme = createTheme();
 
-export function FooterComponent({ children }) {
+export function Footer({ children }) {
     return (
         <ThemeProvider theme={defaultTheme}>
-            <Box
-                sx={{
-                    display: "flex",
-                    flexDirection: "column",
-                    minHeight: "100vh",
-                }}
-            >
+            <Box className="flex flex-col absolute bottom-0 w-screen">
                 <Box
                     component="footer"
                     sx={{

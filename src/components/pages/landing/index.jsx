@@ -4,7 +4,7 @@ export default function Landing() {
     return (
         <>
             <Album />
-            <Footer.component />
+            <Footer />
             {/*
             Component design pattern example
             <MinimalistFooter.component>

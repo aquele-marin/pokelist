@@ -3,13 +3,12 @@ import {
     MFCTitle,
     MFCDescription,
 } from "./MinimalistFooter";
-import { FooterComponent } from "./Footer";
+
+export { Header } from "./Header";
+
+export { Footer } from "./Footer";
 export const MinimalistFooter = {
     component: MinimalistFooterComponent,
     title: MFCTitle,
     description: MFCDescription,
-};
-
-export const Footer = {
-    component: FooterComponent,
 };
