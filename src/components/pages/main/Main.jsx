@@ -1,14 +1,16 @@
 import { ThemeProvider } from "@emotion/react";
-import { createTheme } from "@mui/material";
+import { Divider, Typography, createTheme } from "@mui/material";
 import { CardList } from "../../molecules/DataDisplay";
 import { PokemonCard } from "../../atoms/Surfaces";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import axios from "axios";
 import Grid from "@mui/material/Grid";
+import Button from "@mui/material/Button";
+import { HeroSection } from "../../atoms/Sections";
 
 const defaultTheme = createTheme();
 
-export default function Main() {
+export function Main() {
     const {
         data,
         error,
@@ -35,13 +37,32 @@ export default function Main() {
         <p>Error</p>
     ) : (
         <ThemeProvider theme={defaultTheme}>
+            <HeroSection.Component>
+                <HeroSection.Title>Bem Vindo ao PokeList</HeroSection.Title>
+                <HeroSection.Description>
+                    Confira seus pokemons favoritos e suas informações!! Entre
+                    na aba Pokedex para favoritar e visualizar novos pokemons!
+                </HeroSection.Description>
+                {/* <HeroSection.Buttons>
+                    <Button variant="contained">Main call to action</Button>
+                    <Button variant="outlined">Secondary action</Button>
+                </HeroSection.Buttons> */}
+            </HeroSection.Component>
+            <Divider />
+            <Typography
+                className="flex justify-center bg-pink-300"
+                variant="h2"
+                component="h2"
+            >
+                Favoritos
+            </Typography>
+            <Divider />
             <CardList.Component>
                 <Grid container spacing={2}>
                     {data.pages.map((group) =>
                         group.results.map((pokemon) => (
-                            <Grid item xs={4}>
+                            <Grid item xs={4} key={pokemon.url}>
                                 <PokemonCard
-                                    key={pokemon.url}
                                     name={pokemon.name}
                                     url={pokemon.url}
                                 />

@@ -11,7 +11,7 @@ const defaultTheme = createTheme();
 export function Footer({ children }) {
     return (
         <ThemeProvider theme={defaultTheme}>
-            <Box className="flex flex-col absolute bottom-0 w-screen">
+            <Box className="flex flex-col relative clear bottom-0 w-screen">
                 <Box
                     component="footer"
                     sx={{
