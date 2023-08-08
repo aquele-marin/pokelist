@@ -1,6 +1,6 @@
 import { ThemeProvider } from "@emotion/react";
 import { Divider, Typography, createTheme } from "@mui/material";
-import { CardList } from "../../molecules/DataDisplay";
+import { CardList } from "../../molecules/CardList";
 import { PokemonCard } from "../../atoms/Surfaces";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import axios from "axios";

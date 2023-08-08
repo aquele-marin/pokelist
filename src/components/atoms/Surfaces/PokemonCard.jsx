@@ -14,17 +14,19 @@ import InfoIcon from "@mui/icons-material/Info";
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
 import { Skeleton } from "@mui/material";
+import { PokemonModal } from "../../molecules/PokemonModal";
 
 export function PokemonCard({ name, url }) {
     const theme = useTheme();
+    const pokemonName = name[0].toUpperCase() + name.slice(1);
+    const [open, setOpen] = useState(false);
     const { isLoading, isError, error, data } = useQuery({
         queryKey: [name],
         queryFn: fetchPokemon,
     });
 
-    function handleHover(isHovering) {
-        setIsHovering(isHovering);
-    }
+    const handleClose = () => setOpen(false);
+    const handleOpen = () => setOpen(true);
 
     async function fetchPokemon() {
         return axios.get(url).then((res) => res.data);
@@ -49,16 +51,17 @@ export function PokemonCard({ name, url }) {
                 <Box className="flex flex-col justify-between m-2">
                     <CardContent className="flex flex-col">
                         <Typography component="div" variant="h5">
-                            {name[0].toUpperCase() + name.slice(1)}
+                            {pokemonName}
                         </Typography>
                         <Box>
-                            {data.types.map((type) => (
+                            {data.types.map((type, i) => (
                                 <Chip
                                     label={
                                         type.type.name[0].toUpperCase() +
                                         type.type.name.slice(1)
                                     }
                                     variant="outlined"
+                                    key={i.toString()}
                                 />
                             ))}
                         </Box>
@@ -70,7 +73,7 @@ export function PokemonCard({ name, url }) {
                         }}
                     >
                         <Tooltip title="Informações">
-                            <IconButton aria-label="info">
+                            <IconButton aria-label="info" onClick={handleOpen}>
                                 <InfoIcon />
                             </IconButton>
                         </Tooltip>
@@ -93,6 +96,7 @@ export function PokemonCard({ name, url }) {
                     alt="Live from space album cover"
                 />
             </Box>
+            <PokemonModal data={data} open={open} handleClose={handleClose} />
         </Card>
     );
 }
