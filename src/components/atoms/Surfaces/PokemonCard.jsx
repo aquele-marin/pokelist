@@ -8,6 +8,7 @@ import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import Tooltip from "@mui/material/Tooltip";
 import Chip from "@mui/material/Chip";
 import InfoIcon from "@mui/icons-material/Info";
 import axios from "axios";
@@ -16,7 +17,6 @@ import { Skeleton } from "@mui/material";
 
 export function PokemonCard({ name, url }) {
     const theme = useTheme();
-    const [isHovering, setIsHovering] = useState(false);
     const { isLoading, isError, error, data } = useQuery({
         queryKey: [name],
         queryFn: fetchPokemon,
@@ -67,30 +67,22 @@ export function PokemonCard({ name, url }) {
                         sx={{
                             display: "flex",
                             alignItems: "center",
-                            // pl: 1,
-                            // pb: 0,
                         }}
                     >
-                        <IconButton aria-label="info">
-                            <InfoIcon />
-                        </IconButton>
-                        <IconButton
-                            aria-label="favorite"
-                            onMouseEnter={() => handleHover(true)}
-                            onMouseLeave={() => handleHover(false)}
-                        >
-                            {isFavorite() ? (
-                                isHovering ? (
-                                    <FavoriteBorderIcon />
-                                ) : (
+                        <Tooltip title="Informações">
+                            <IconButton aria-label="info">
+                                <InfoIcon />
+                            </IconButton>
+                        </Tooltip>
+                        <Tooltip title="Favoritar">
+                            <IconButton aria-label="favorite">
+                                {isFavorite() ? (
                                     <FavoriteIcon />
-                                )
-                            ) : isHovering ? (
-                                <FavoriteIcon />
-                            ) : (
-                                <FavoriteBorderIcon />
-                            )}
-                        </IconButton>
+                                ) : (
+                                    <FavoriteBorderIcon />
+                                )}
+                            </IconButton>
+                        </Tooltip>
                     </Box>
                 </Box>
                 <CardMedia
