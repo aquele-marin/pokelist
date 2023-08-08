@@ -6,7 +6,7 @@ export function CardListComponent({ children }) {
     return (
         <motion.div
             layout
-            style={{ height: "36rem", overflowY: "scroll", display: "flex" }}
+            style={{ display: "flex", marginTop: "2rem", marginBottom: "2rem" }}
         >
             <motion.div
                 layout

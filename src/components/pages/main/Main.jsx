@@ -67,12 +67,12 @@ export function Main() {
                     )}
                 </Grid>
             </CardList.Component>
-            {isFetchingNextPage
+            {/* {isFetchingNextPage
                 ? "Loading more..."
                 : hasNextPage
                 ? "Load More"
                 : "Nothing more to load"}
-            {isFetching && !isFetchingNextPage ? "Fetching..." : null}
+            {isFetching && !isFetchingNextPage ? "Fetching..." : null} */}
         </ThemeProvider>
     );
 }
