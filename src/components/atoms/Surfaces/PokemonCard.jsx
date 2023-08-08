@@ -6,15 +6,13 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
-import SkipPreviousIcon from "@mui/icons-material/SkipPrevious";
-import PlayArrowIcon from "@mui/icons-material/PlayArrow";
-import SkipNextIcon from "@mui/icons-material/SkipNext";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import Chip from "@mui/material/Chip";
 import InfoIcon from "@mui/icons-material/Info";
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
+import { Skeleton } from "@mui/material";
 
 export function PokemonCard({ name, url }) {
     const theme = useTheme();
@@ -28,7 +26,7 @@ export function PokemonCard({ name, url }) {
         setIsHovering(isHovering);
     }
 
-    function fetchPokemon() {
+    async function fetchPokemon() {
         return axios.get(url).then((res) => res.data);
     }
 
@@ -37,7 +35,7 @@ export function PokemonCard({ name, url }) {
     }
 
     return isLoading ? (
-        <p>Loading...</p>
+        <Skeleton variant="rounded" width={472} height={156} />
     ) : isError ? (
         <p>Error: {error.message}</p>
     ) : (
@@ -47,7 +45,7 @@ export function PokemonCard({ name, url }) {
                 justifyContent: "space-between",
             }}
         >
-            <Box className="flex justify-between w-full shadow-md">
+            <Box className="flex justify-between w-full">
                 <Box className="flex flex-col justify-between m-2">
                     <CardContent className="flex flex-col">
                         <Typography component="div" variant="h5">
@@ -93,23 +91,6 @@ export function PokemonCard({ name, url }) {
                                 <FavoriteBorderIcon />
                             )}
                         </IconButton>
-                        {/* <IconButton aria-label="previous">
-                            {theme.direction === "rtl" ? (
-                                <SkipNextIcon />
-                            ) : (
-                                <SkipPreviousIcon />
-                            )}
-                        </IconButton>
-                        <IconButton aria-label="play/pause">
-                            <PlayArrowIcon sx={{ height: 38, width: 38 }} />
-                        </IconButton>
-                        <IconButton aria-label="next">
-                            {theme.direction === "rtl" ? (
-                                <SkipPreviousIcon />
-                            ) : (
-                                <SkipNextIcon />
-                            )}
-                        </IconButton> */}
                     </Box>
                 </Box>
                 <CardMedia
