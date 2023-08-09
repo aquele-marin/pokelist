@@ -1,4 +1,3 @@
-import * as React from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
@@ -16,7 +15,7 @@ import { Copyright } from "../../atoms/Copyright";
 const defaultTheme = createTheme();
 
 export function Login() {
-    const handleSubmit = (event) => {
+    const handleSubmit = (event: any) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
         console.log({
@@ -124,7 +123,7 @@ export function Login() {
                                     </Link>
                                 </Grid>
                             </Grid>
-                            <Copyright sx={{ mt: 5 }} />
+                            <Copyright />
                         </Box>
                     </Box>
                 </Grid>

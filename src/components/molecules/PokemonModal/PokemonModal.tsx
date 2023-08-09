@@ -1,5 +1,5 @@
 import { Modal } from "../../atoms/Modal";
-import { Chip, Button, Box } from "@mui/material";
+import { Chip, Button } from "@mui/material";
 import {
     Chart,
     RadialLinearScale,
@@ -10,6 +10,7 @@ import {
     Legend,
 } from "chart.js";
 import { Radar } from "react-chartjs-2";
+import { PokemonData } from "../../../types/PokeAPI";
 
 Chart.register(
     RadialLinearScale,
@@ -20,7 +21,13 @@ Chart.register(
     Legend
 );
 
-export function PokemonModal({ data, open, handleClose }) {
+interface PokemonModalProps {
+    data: PokemonData;
+    open: boolean;
+    handleClose: () => void;
+}
+
+export function PokemonModal({ data, open, handleClose }: PokemonModalProps) {
     const pokemonName = data.name[0].toUpperCase() + data.name.slice(1);
     const pokemonStats = {
         labels: data.stats.map(
@@ -38,7 +45,7 @@ export function PokemonModal({ data, open, handleClose }) {
     };
     const options = {
         responsive: true,
-        plugins: { legend: false },
+        plugins: { legend: undefined },
         scales: {
             r: {
                 min: 0,

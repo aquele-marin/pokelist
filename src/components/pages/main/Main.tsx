@@ -1,23 +1,22 @@
 import { ThemeProvider } from "@emotion/react";
 import { Divider, Typography, createTheme } from "@mui/material";
-import { CardList } from "../../molecules/CardList";
-import { PokemonCard } from "../../atoms/Surfaces";
+import { CardList } from "../../molecules/CardList/index.tsx";
+import { PokemonCard } from "../../atoms/Surfaces/index.tsx";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import axios from "axios";
 import Grid from "@mui/material/Grid";
-import Button from "@mui/material/Button";
-import { HeroSection } from "../../atoms/Sections";
+import { HeroSection } from "../../atoms/Sections/index.tsx";
 
 const defaultTheme = createTheme();
 
 export function Main() {
     const {
         data,
-        error,
-        fetchNextPage,
-        hasNextPage,
-        isFetching,
-        isFetchingNextPage,
+        // error,
+        // fetchNextPage,
+        // hasNextPage,
+        // isFetching,
+        // isFetchingNextPage,
         status,
     } = useInfiniteQuery({
         queryKey: ["pokemons"],
@@ -56,7 +55,7 @@ export function Main() {
             <CardList.Component>
                 <Grid container spacing={2}>
                     {data.pages.map((group) =>
-                        group.results.map((pokemon) => (
+                        group.results.map((pokemon: any) => (
                             <Grid item xs={4} key={pokemon.url}>
                                 <PokemonCard
                                     name={pokemon.name}

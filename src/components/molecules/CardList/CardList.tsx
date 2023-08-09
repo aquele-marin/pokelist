@@ -1,8 +1,10 @@
-import { Box, Typography } from "@mui/material";
 import { motion } from "framer-motion";
-import { PokemonCard } from "../../atoms/Surfaces";
 
-export function CardListComponent({ children }) {
+interface CardListComponentProps {
+    children: React.ReactNode;
+}
+
+export function CardListComponent({ children }: CardListComponentProps) {
     return (
         <motion.div
             layout

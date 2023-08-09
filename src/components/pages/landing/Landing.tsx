@@ -1,4 +1,4 @@
-import { Footer, MinimalistFooter } from "../../atoms/Sections";
+import { Footer } from "../../atoms/Sections";
 import Album from "./Album";
 export function Landing() {
     return (

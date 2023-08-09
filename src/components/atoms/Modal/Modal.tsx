@@ -2,7 +2,17 @@ import { Modal } from "@mui/material";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 
-export function ModalComponent({ open, handleClose, children }) {
+interface ModalComponentProps {
+    open: boolean;
+    handleClose: (event: {}, reason: "backdropClick" | "escapeKeyDown") => void;
+    children: React.ReactNode;
+}
+
+export function ModalComponent({
+    open,
+    handleClose,
+    children,
+}: ModalComponentProps) {
     return (
         <Modal
             open={open}
@@ -17,11 +27,19 @@ export function ModalComponent({ open, handleClose, children }) {
     );
 }
 
-export function ModalContent({ children }) {
+interface ModalContentProps {
+    children: React.ReactNode;
+}
+
+export function ModalContent({ children }: ModalContentProps) {
     return <Box>{children}</Box>;
 }
 
-export function ModalTitle({ children }) {
+interface ModalTitleProps {
+    children: React.ReactNode;
+}
+
+export function ModalTitle({ children }: ModalTitleProps) {
     return (
         <Typography id="modal-modal-title" variant="h4" component="h2">
             {children}
@@ -29,7 +47,11 @@ export function ModalTitle({ children }) {
     );
 }
 
-export function ModalMedia({ url }) {
+interface ModalMediaProps {
+    url: string;
+}
+
+export function ModalMedia({ url }: ModalMediaProps) {
     return (
         <img
             src={url}
@@ -39,11 +61,19 @@ export function ModalMedia({ url }) {
     );
 }
 
-export function ModalButtons({ children }) {
+interface ModalButtonsProps {
+    children: React.ReactNode;
+}
+
+export function ModalButtons({ children }: ModalButtonsProps) {
     return <Box className=" flex justify-end col-span-2">{children}</Box>;
 }
 
-export function ModalDescription({ children }) {
+interface ModalDescriptionProps {
+    children: React.ReactNode;
+}
+
+export function ModalDescription({ children }: ModalDescriptionProps) {
     return (
         <Typography id="modal-modal-description" sx={{ mt: 2 }}>
             {children}

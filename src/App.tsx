@@ -1,5 +1,4 @@
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import { ProvideAuth } from "./hooks/useAuth";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { CssBaseline } from "@mui/material";
 import { Login } from "./components/pages/login";
 import { Landing } from "./components/pages/landing";
@@ -45,7 +44,7 @@ function Home() {
                 <Header />
                 <Routes>
                     <Route path="/" element={<Main />} />
-                    <Route exact path="/profile" element={<Profile />} />
+                    <Route path="/profile" element={<Profile />} />
                 </Routes>
                 <Footer />
             </Box>
@@ -55,16 +54,14 @@ function Home() {
 
 function App() {
     return (
-        <ProvideAuth>
-            <BrowserRouter>
-                <CssBaseline />
-                <Routes>
-                    <Route path="/login" element={<Login />} />
-                    <Route path="/landing" element={<Landing />} />
-                    <Route path="/*" element={<Home />} />
-                </Routes>
-            </BrowserRouter>
-        </ProvideAuth>
+        <BrowserRouter>
+            <CssBaseline />
+            <Routes>
+                <Route path="/login" element={<Login />} />
+                <Route path="/landing" element={<Landing />} />
+                <Route path="/*" element={<Home />} />
+            </Routes>
+        </BrowserRouter>
     );
 }
 

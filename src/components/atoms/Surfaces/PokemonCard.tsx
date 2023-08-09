@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import { useTheme } from "@mui/material/styles";
+import { useState } from "react";
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
@@ -15,12 +14,24 @@ import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
 import { Skeleton } from "@mui/material";
 import { PokemonModal } from "../../molecules/PokemonModal";
+import { PokemonData } from "../../../types/PokeAPI";
 
-export function PokemonCard({ name, url }) {
-    const theme = useTheme();
+interface PokemonCardProps {
+    name: string;
+    url: string;
+}
+
+export function PokemonCard({ name, url }: PokemonCardProps) {
     const pokemonName = name[0].toUpperCase() + name.slice(1);
     const [open, setOpen] = useState(false);
-    const { isLoading, isError, error, data } = useQuery({
+
+    interface UseQueryResult {
+        isLoading: boolean;
+        isError: boolean;
+        error: any;
+        data: PokemonData | undefined;
+    }
+    const { isLoading, isError, error, data }: UseQueryResult = useQuery({
         queryKey: [name],
         queryFn: fetchPokemon,
     });
@@ -36,7 +47,7 @@ export function PokemonCard({ name, url }) {
         return true;
     }
 
-    return isLoading ? (
+    return isLoading || !data ? (
         <Skeleton variant="rounded" width={472} height={156} />
     ) : isError ? (
         <p>Error: {error.message}</p>

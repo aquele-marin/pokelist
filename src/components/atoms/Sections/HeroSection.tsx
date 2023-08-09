@@ -2,9 +2,12 @@ import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import Stack from "@mui/material/Stack";
-import Button from "@mui/material/Button";
 
-export function HeroSectionTitle({ children }) {
+interface HeroSectionTitleProps {
+    children: React.ReactNode;
+}
+
+export function HeroSectionTitle({ children }: HeroSectionTitleProps) {
     return (
         <Typography
             component="h1"
@@ -18,7 +21,13 @@ export function HeroSectionTitle({ children }) {
     );
 }
 
-export function HeroSectionDescription({ children }) {
+interface HeroSectionDescriptionProps {
+    children: React.ReactNode;
+}
+
+export function HeroSectionDescription({
+    children,
+}: HeroSectionDescriptionProps) {
     return (
         <Typography
             variant="h5"
@@ -31,7 +40,11 @@ export function HeroSectionDescription({ children }) {
     );
 }
 
-export function HeroSectionButtons({ children }) {
+interface HeroSectioButtonsProps {
+    children: React.ReactNode;
+}
+
+export function HeroSectionButtons({ children }: HeroSectioButtonsProps) {
     return (
         <Stack
             sx={{ pt: 4 }}
@@ -46,7 +59,11 @@ export function HeroSectionButtons({ children }) {
     );
 }
 
-export function HeroSectionComponent({ children }) {
+interface HeroSectionComponentProps {
+    children: React.ReactNode;
+}
+
+export function HeroSectionComponent({ children }: HeroSectionComponentProps) {
     return (
         <Box
             sx={{
