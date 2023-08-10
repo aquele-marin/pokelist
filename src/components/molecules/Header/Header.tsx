@@ -1,4 +1,4 @@
-import * as React from "react";
+import { useState } from "react";
 import { styled, alpha } from "@mui/material/styles";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -15,6 +15,7 @@ import AccountCircle from "@mui/icons-material/AccountCircle";
 import MailIcon from "@mui/icons-material/Mail";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import MoreIcon from "@mui/icons-material/MoreVert";
+import { TemporaryDrawer } from "../../atoms/Drawer";
 
 const Search = styled("div")(({ theme }) => ({
     position: "relative",
@@ -57,8 +58,9 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 export function Header() {
-    const [anchorEl, setAnchorEl] = React.useState(null);
-    const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
+    const [anchorEl, setAnchorEl] = useState(null);
+    const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
+    const [openDrawer, setOpenDrawer] = useState(false);
 
     const isMenuOpen = Boolean(anchorEl);
     const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -80,12 +82,25 @@ export function Header() {
         setMobileMoreAnchorEl(event.currentTarget);
     };
 
+    const toggleDrawer =
+        (open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
+            if (
+                event.type === "keydown" &&
+                ((event as React.KeyboardEvent).key === "Tab" ||
+                    (event as React.KeyboardEvent).key === "Shift")
+            ) {
+                return;
+            }
+
+            setOpenDrawer(open);
+        };
+
     const menuId = "primary-search-account-menu";
     const renderMenu = (
         <Menu
             anchorEl={anchorEl}
             anchorOrigin={{
-                vertical: "top",
+                vertical: "bottom",
                 horizontal: "right",
             }}
             id={menuId}
@@ -97,8 +112,8 @@ export function Header() {
             open={isMenuOpen}
             onClose={handleMenuClose}
         >
-            <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-            <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+            <MenuItem onClick={handleMenuClose}>Seu perfil</MenuItem>
+            <MenuItem onClick={handleMenuClose}>Configurações</MenuItem>
         </Menu>
     );
 
@@ -162,12 +177,18 @@ export function Header() {
         <Box sx={{ flexGrow: 1 }}>
             <AppBar position="static">
                 <Toolbar>
+                    <TemporaryDrawer
+                        side="left"
+                        open={openDrawer}
+                        toggleDrawer={toggleDrawer}
+                    />
                     <IconButton
                         size="large"
                         edge="start"
                         color="inherit"
                         aria-label="open drawer"
                         sx={{ mr: 2 }}
+                        onClick={() => setOpenDrawer(true)}
                     >
                         <MenuIcon />
                     </IconButton>
@@ -177,7 +198,7 @@ export function Header() {
                         component="div"
                         sx={{ display: { xs: "none", sm: "block" } }}
                     >
-                        MUI
+                        PokeList
                     </Typography>
                     <Search>
                         <SearchIconWrapper>
@@ -192,19 +213,10 @@ export function Header() {
                     <Box sx={{ display: { xs: "none", md: "flex" } }}>
                         <IconButton
                             size="large"
-                            aria-label="show 4 new mails"
+                            aria-label="show new notifications"
                             color="inherit"
                         >
-                            <Badge badgeContent={4} color="error">
-                                <MailIcon />
-                            </Badge>
-                        </IconButton>
-                        <IconButton
-                            size="large"
-                            aria-label="show 17 new notifications"
-                            color="inherit"
-                        >
-                            <Badge badgeContent={17} color="error">
+                            <Badge badgeContent={0} color="error">
                                 <NotificationsIcon />
                             </Badge>
                         </IconButton>

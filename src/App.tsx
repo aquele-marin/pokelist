@@ -6,7 +6,8 @@ import { Main } from "./components/pages/main";
 import { Profile } from "./components/pages/profile";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import Box from "@mui/material/Box";
-import { Footer, Header } from "./components/atoms/Sections";
+import { Footer } from "./components/atoms/Footer";
+import { Header } from "./components/molecules/Header";
 
 // Deprecated due to react-router-dom upgrade to v6
 // function PrivateRoute({ element, path, exact = false, ...rest }) {

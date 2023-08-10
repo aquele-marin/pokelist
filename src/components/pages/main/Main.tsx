@@ -1,11 +1,11 @@
 import { ThemeProvider } from "@emotion/react";
 import { Divider, Typography, createTheme } from "@mui/material";
 import { CardList } from "../../molecules/CardList/index.tsx";
-import { PokemonCard } from "../../atoms/Surfaces/index.tsx";
+import { PokemonCard } from "../../organisms/PokemonCard";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import axios from "axios";
 import Grid from "@mui/material/Grid";
-import { HeroSection } from "../../atoms/Sections/index.tsx";
+import { HeroSection } from "../../atoms/HeroSection";
 
 const defaultTheme = createTheme();
 
@@ -21,7 +21,8 @@ export function Main() {
     } = useInfiniteQuery({
         queryKey: ["pokemons"],
         queryFn: fetchPokemons,
-        getNextPageParam: (lastPage, pages) => lastPage.nextCursor,
+        getNextPageParam: (lastPage) => lastPage.nextCursor,
+        // getNextPageParam: (lastPage, pages) => lastPage.nextCursor,
     });
 
     function fetchPokemons() {
