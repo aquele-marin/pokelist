@@ -9,13 +9,12 @@ import InputBase from "@mui/material/InputBase";
 import Badge from "@mui/material/Badge";
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
-import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
 import AccountCircle from "@mui/icons-material/AccountCircle";
-import MailIcon from "@mui/icons-material/Mail";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import MoreIcon from "@mui/icons-material/MoreVert";
-import { TemporaryDrawer } from "../../atoms/Drawer";
+import MenuIcon from "@mui/icons-material/Menu";
+import Button from "@mui/material/Button";
 
 const Search = styled("div")(({ theme }) => ({
     position: "relative",
@@ -60,7 +59,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 export function Header() {
     const [anchorEl, setAnchorEl] = useState(null);
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
-    const [openDrawer, setOpenDrawer] = useState(false);
+    const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
 
     const isMenuOpen = Boolean(anchorEl);
     const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -82,18 +81,13 @@ export function Header() {
         setMobileMoreAnchorEl(event.currentTarget);
     };
 
-    const toggleDrawer =
-        (open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
-            if (
-                event.type === "keydown" &&
-                ((event as React.KeyboardEvent).key === "Tab" ||
-                    (event as React.KeyboardEvent).key === "Shift")
-            ) {
-                return;
-            }
+    const handleCloseNavMenu = () => {
+        setAnchorElNav(null);
+    };
 
-            setOpenDrawer(open);
-        };
+    const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
+        setAnchorElNav(event.currentTarget);
+    };
 
     const menuId = "primary-search-account-menu";
     const renderMenu = (
@@ -114,6 +108,7 @@ export function Header() {
         >
             <MenuItem onClick={handleMenuClose}>Seu perfil</MenuItem>
             <MenuItem onClick={handleMenuClose}>Configurações</MenuItem>
+            <MenuItem onClick={handleMenuClose}>Sair</MenuItem>
         </Menu>
     );
 
@@ -137,26 +132,14 @@ export function Header() {
             <MenuItem>
                 <IconButton
                     size="large"
-                    aria-label="show 4 new mails"
-                    color="inherit"
-                >
-                    <Badge badgeContent={4} color="error">
-                        <MailIcon />
-                    </Badge>
-                </IconButton>
-                <p>Messages</p>
-            </MenuItem>
-            <MenuItem>
-                <IconButton
-                    size="large"
                     aria-label="show 17 new notifications"
                     color="inherit"
                 >
-                    <Badge badgeContent={17} color="error">
+                    <Badge badgeContent={0} color="error">
                         <NotificationsIcon />
                     </Badge>
                 </IconButton>
-                <p>Notifications</p>
+                <p>Notificações</p>
             </MenuItem>
             <MenuItem onClick={handleProfileMenuOpen}>
                 <IconButton
@@ -168,30 +151,77 @@ export function Header() {
                 >
                     <AccountCircle />
                 </IconButton>
-                <p>Profile</p>
+                <p>Sua conta</p>
             </MenuItem>
         </Menu>
+    );
+
+    const renderNavLinks = (
+        <Box
+            sx={{
+                flexGrow: 1,
+                display: { xs: "none", md: "flex" },
+            }}
+        >
+            <Button
+                onClick={handleCloseNavMenu}
+                sx={{
+                    my: 2,
+                    color: "white",
+                    display: "block",
+                }}
+            >
+                Pokedex
+            </Button>
+        </Box>
+    );
+
+    const renderMobileNavLinks = (
+        <Box
+            sx={{
+                flexGrow: 1,
+                display: { xs: "flex", md: "none" },
+            }}
+        >
+            <IconButton
+                size="large"
+                aria-label="account of current user"
+                aria-controls="menu-appbar"
+                aria-haspopup="true"
+                onClick={handleOpenNavMenu}
+                color="inherit"
+            >
+                <MenuIcon />
+            </IconButton>
+            <Menu
+                id="menu-appbar"
+                anchorEl={anchorElNav}
+                anchorOrigin={{
+                    vertical: "bottom",
+                    horizontal: "left",
+                }}
+                keepMounted
+                transformOrigin={{
+                    vertical: "top",
+                    horizontal: "left",
+                }}
+                open={Boolean(anchorElNav)}
+                onClose={handleCloseNavMenu}
+                sx={{
+                    display: { xs: "block", md: "none" },
+                }}
+            >
+                <MenuItem onClick={handleCloseNavMenu}>
+                    <Typography textAlign="center">Pokedex</Typography>
+                </MenuItem>
+            </Menu>
+        </Box>
     );
 
     return (
         <Box sx={{ flexGrow: 1 }}>
             <AppBar position="static">
                 <Toolbar>
-                    <TemporaryDrawer
-                        side="left"
-                        open={openDrawer}
-                        toggleDrawer={toggleDrawer}
-                    />
-                    <IconButton
-                        size="large"
-                        edge="start"
-                        color="inherit"
-                        aria-label="open drawer"
-                        sx={{ mr: 2 }}
-                        onClick={() => setOpenDrawer(true)}
-                    >
-                        <MenuIcon />
-                    </IconButton>
                     <Typography
                         variant="h6"
                         noWrap
@@ -209,7 +239,8 @@ export function Header() {
                             inputProps={{ "aria-label": "search" }}
                         />
                     </Search>
-                    <Box sx={{ flexGrow: 1 }} />
+                    {renderNavLinks}
+                    {renderMobileNavLinks}
                     <Box sx={{ display: { xs: "none", md: "flex" } }}>
                         <IconButton
                             size="large"
