@@ -8,6 +8,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import Box from "@mui/material/Box";
 import { Footer } from "./components/atoms/Footer";
 import { Header } from "./components/molecules/Header";
+import { Pokedex } from "./components/pages/pokedex";
 
 // Deprecated due to react-router-dom upgrade to v6
 // function PrivateRoute({ element, path, exact = false, ...rest }) {
@@ -46,6 +47,7 @@ function Home() {
                 <Routes>
                     <Route path="/" element={<Main />} />
                     <Route path="/profile" element={<Profile />} />
+                    <Route path="/pokedex" element={<Pokedex />} />
                 </Routes>
                 <Footer />
             </Box>

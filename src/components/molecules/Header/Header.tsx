@@ -15,6 +15,7 @@ import NotificationsIcon from "@mui/icons-material/Notifications";
 import MoreIcon from "@mui/icons-material/MoreVert";
 import MenuIcon from "@mui/icons-material/Menu";
 import Button from "@mui/material/Button";
+import { Link } from "react-router-dom";
 
 const Search = styled("div")(({ theme }) => ({
     position: "relative",
@@ -106,8 +107,12 @@ export function Header() {
             open={isMenuOpen}
             onClose={handleMenuClose}
         >
-            <MenuItem onClick={handleMenuClose}>Seu perfil</MenuItem>
-            <MenuItem onClick={handleMenuClose}>Configurações</MenuItem>
+            <Link to="/profile">
+                <MenuItem onClick={handleMenuClose}>Seu perfil</MenuItem>
+            </Link>
+            <Link to="/config">
+                <MenuItem onClick={handleMenuClose}>Configurações</MenuItem>
+            </Link>
             <MenuItem onClick={handleMenuClose}>Sair</MenuItem>
         </Menu>
     );
@@ -171,7 +176,7 @@ export function Header() {
                     display: "block",
                 }}
             >
-                Pokedex
+                <Link to="/pokedex">Pokedex</Link>
             </Button>
         </Box>
     );
@@ -211,9 +216,16 @@ export function Header() {
                     display: { xs: "block", md: "none" },
                 }}
             >
-                <MenuItem onClick={handleCloseNavMenu}>
-                    <Typography textAlign="center">Pokedex</Typography>
-                </MenuItem>
+                <Link to="/">
+                    <MenuItem onClick={handleCloseNavMenu}>
+                        <Typography textAlign="center">Home</Typography>
+                    </MenuItem>
+                </Link>
+                <Link to="/pokedex">
+                    <MenuItem onClick={handleCloseNavMenu}>
+                        <Typography textAlign="center">Pokedex</Typography>
+                    </MenuItem>
+                </Link>
             </Menu>
         </Box>
     );
@@ -228,7 +240,7 @@ export function Header() {
                         component="div"
                         sx={{ display: { xs: "none", sm: "block" } }}
                     >
-                        PokeList
+                        <Link to="/">PokeList</Link>
                     </Typography>
                     <Search>
                         <SearchIconWrapper>
