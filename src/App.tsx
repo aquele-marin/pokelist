@@ -7,7 +7,7 @@ import { Profile } from "./components/pages/profile";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import Box from "@mui/material/Box";
 import { Footer } from "./components/atoms/Footer";
-import { Header } from "./components/molecules/Header";
+import { Header } from "./components/atoms/Header";
 import { Pokedex } from "./components/pages/pokedex";
 
 // Deprecated due to react-router-dom upgrade to v6
