@@ -1,11 +1,7 @@
-import Box from "@mui/material/Box";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import axios from "axios";
-import Grid from "@mui/material/Grid";
 import { CardList } from "../../atoms/CardList";
 import { PokemonCard } from "../../organisms/PokemonCard";
-import { Typography } from "@mui/material";
-import Button from "@mui/material/Button";
 
 export function Pokedex() {
     const {
@@ -13,7 +9,7 @@ export function Pokedex() {
         // error,
         fetchNextPage,
         hasNextPage,
-        isFetching,
+        // isFetching,
         isFetchingNextPage,
         status,
     } = useInfiniteQuery({
@@ -45,40 +41,33 @@ export function Pokedex() {
     ) : status == "error" ? (
         <p>Error</p>
     ) : (
-        <Box
-            onScroll={handleScroll}
+        <CardList.Component
+            cols={12}
             id="list"
-            className="bg-gray-300 m-16 h-[48rem] overflow-scroll"
+            className="bg-gray-300 rounded-sm m-16 h-[48rem] overflow-scroll"
+            onScroll={handleScroll}
         >
-            <CardList.Component>
-                <Grid container spacing={1}>
-                    {data.pages.map((group) =>
-                        group.results.map((pokemon: any) => (
-                            <Grid item xs={4} key={pokemon.url}>
-                                <CardList.Item>
-                                    <PokemonCard
-                                        name={pokemon.name}
-                                        url={pokemon.url}
-                                    />
-                                </CardList.Item>
-                            </Grid>
-                        ))
-                    )}
-                </Grid>
-            </CardList.Component>
-            <Button
-                onClick={() => fetchNextPage()}
-                disabled={!hasNextPage || isFetchingNextPage}
-            >
-                {isFetchingNextPage
-                    ? "Loading more..."
-                    : hasNextPage
-                    ? "Load More"
-                    : "Nothing more to load"}
-            </Button>
-            <Typography>
-                {isFetching && !isFetchingNextPage ? "Fetching..." : null}
-            </Typography>
-        </Box>
+            {data.pages.map((group) =>
+                group.results.map((pokemon: any) => (
+                    <CardList.Item key={pokemon.url} cols={4}>
+                        <PokemonCard name={pokemon.name} url={pokemon.url} />
+                    </CardList.Item>
+                ))
+            )}
+        </CardList.Component>
     );
 }
+
+// {/* <Button
+//     onClick={() => fetchNextPage()}
+//     disabled={!hasNextPage || isFetchingNextPage}
+// >
+//     {isFetchingNextPage
+//         ? "Loading more..."
+//         : hasNextPage
+//         ? "Load More"
+//         : "Nothing more to load"}
+// </Button>
+// <Typography>
+//     {isFetching && !isFetchingNextPage ? "Fetching..." : null}
+// </Typography> */}
