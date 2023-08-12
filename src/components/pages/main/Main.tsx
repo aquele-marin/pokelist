@@ -4,7 +4,6 @@ import { CardList } from "../../atoms/CardList/index.tsx";
 import { PokemonCard } from "../../organisms/PokemonCard";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import axios from "axios";
-import Grid from "@mui/material/Grid";
 import { HeroSection } from "../../atoms/HeroSection";
 
 const defaultTheme = createTheme();
@@ -19,7 +18,7 @@ export function Main() {
         // isFetchingNextPage,
         status,
     } = useInfiniteQuery({
-        queryKey: ["pokemons"],
+        queryKey: ["favoritePokemons"],
         queryFn: fetchPokemons,
         getNextPageParam: (lastPage) => lastPage.nextCursor,
         // getNextPageParam: (lastPage, pages) => lastPage.nextCursor,
@@ -53,19 +52,17 @@ export function Main() {
                 Favoritos
             </Typography>
             <Divider />
-            <CardList.Component>
-                <Grid container spacing={2}>
-                    {data.pages.map((group) =>
-                        group.results.map((pokemon: any) => (
-                            <Grid item xs={4} key={pokemon.url}>
-                                <PokemonCard
-                                    name={pokemon.name}
-                                    url={pokemon.url}
-                                />
-                            </Grid>
-                        ))
-                    )}
-                </Grid>
+            <CardList.Component cols={12}>
+                {data.pages.map((group) =>
+                    group.results.map((pokemon: any) => (
+                        <CardList.Item cols={4} key={pokemon.url}>
+                            <PokemonCard
+                                name={pokemon.name}
+                                url={pokemon.url}
+                            />
+                        </CardList.Item>
+                    ))
+                )}
             </CardList.Component>
             {/* {isFetchingNextPage
                 ? "Loading more..."
