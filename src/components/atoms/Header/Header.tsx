@@ -168,16 +168,18 @@ export function Header() {
                 display: { xs: "none", md: "flex" },
             }}
         >
-            <Button
-                onClick={handleCloseNavMenu}
-                sx={{
-                    my: 2,
-                    color: "white",
-                    display: "block",
-                }}
-            >
-                <Link to="/pokedex">Pokedex</Link>
-            </Button>
+            <Link to="/pokedex">
+                <Button
+                    onClick={handleCloseNavMenu}
+                    sx={{
+                        my: 2,
+                        color: "white",
+                        display: "block",
+                    }}
+                >
+                    Pokedex
+                </Button>
+            </Link>
         </Box>
     );
 
