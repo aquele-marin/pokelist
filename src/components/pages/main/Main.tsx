@@ -30,11 +30,7 @@ export function Main() {
             .then((res) => res.data);
     }
 
-    return status == "loading" ? (
-        <p>Loading...</p>
-    ) : status == "error" ? (
-        <p>Error</p>
-    ) : (
+    return (
         <ThemeProvider theme={defaultTheme}>
             <HeroSection.Component>
                 <HeroSection.Title>Bem Vindo ao PokeList</HeroSection.Title>
@@ -52,8 +48,12 @@ export function Main() {
                 Favoritos
             </Typography>
             <Divider />
-            <CardList.Component cols={12}>
-                {data.pages.map((group) =>
+            <CardList.Component
+                cols={12}
+                status={status}
+                className="min-h-[16rem]"
+            >
+                {data?.pages.map((group) =>
                     group.results.map((pokemon: any) => (
                         <CardList.Item cols={4} key={pokemon.url}>
                             <PokemonCard

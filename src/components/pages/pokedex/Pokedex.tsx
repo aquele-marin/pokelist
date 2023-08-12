@@ -36,18 +36,16 @@ export function Pokedex() {
         }
     }
 
-    return status == "loading" ? (
-        <p>Loading...</p>
-    ) : status == "error" ? (
-        <p>Error</p>
-    ) : (
+    return (
         <CardList.Component
             cols={12}
             id="list"
-            className="bg-gray-300 rounded-sm m-16 h-[48rem] overflow-scroll"
+            // className="bg-gray-300 rounded-sm m-16 h-[48rem] overflow-scroll"
+            className="overflow-scroll h-[48rem] m-16 rounded-sm bg-gray-300"
             onScroll={handleScroll}
+            status={status}
         >
-            {data.pages.map((group) =>
+            {data?.pages.map((group) =>
                 group.results.map((pokemon: any) => (
                     <CardList.Item key={pokemon.url} cols={4}>
                         <PokemonCard name={pokemon.name} url={pokemon.url} />
