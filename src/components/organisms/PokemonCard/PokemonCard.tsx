@@ -12,7 +12,6 @@ import Chip from "@mui/material/Chip";
 import InfoIcon from "@mui/icons-material/Info";
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
-import { Skeleton } from "@mui/material";
 import { PokemonModal } from "../../molecules/PokemonModal";
 import { PokemonData } from "../../../types/PokeAPI";
 
@@ -48,9 +47,9 @@ export function PokemonCard({ name, url }: PokemonCardProps) {
     }
 
     return isLoading || !data ? (
-        <Skeleton variant="rounded" width={472} height={156} />
+        <PokemonCardLoadingState />
     ) : isError ? (
-        <p>Error: {error.message}</p>
+        <PokemonCardErrorState error={error} />
     ) : (
         <Card
             sx={{
@@ -109,5 +108,22 @@ export function PokemonCard({ name, url }: PokemonCardProps) {
             </Box>
             <PokemonModal data={data} open={open} handleClose={handleClose} />
         </Card>
+    );
+}
+
+function PokemonCardLoadingState() {
+    return <div className="w-full h-[10rem] bg-gray-200 animate-pulse"></div>;
+}
+
+function PokemonCardErrorState({ error }: any) {
+    console.log(error.message);
+    return (
+        <div className="w-full h-[10rem] bg-gray-200 flex flex-col justify-center items-center">
+            <p className="font-bold mt-2 text-lg text-center">
+                <span className="text-red-600">Houve um problema</span>
+                <br />
+                no site tente novamente mais tarde
+            </p>
+        </div>
     );
 }
