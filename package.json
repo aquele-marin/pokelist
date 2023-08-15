@@ -6,6 +6,7 @@
         "@emotion/react": "^11.11.1",
         "@emotion/styled": "^11.11.0",
         "@fontsource/roboto": "^5.0.5",
+        "@hookform/resolvers": "^3.2.0",
         "@mui/icons-material": "^5.14.1",
         "@mui/material": "^5.14.2",
         "@tanstack/react-query": "^4.32.0",
@@ -15,7 +16,9 @@
         "react": "^18.2.0",
         "react-chartjs-2": "^5.2.0",
         "react-dom": "^18.2.0",
-        "react-router-dom": "^6.14.2"
+        "react-hook-form": "^7.45.4",
+        "react-router-dom": "^6.14.2",
+        "yup": "^1.2.0"
     },
     "scripts": {
         "start": "vite",
