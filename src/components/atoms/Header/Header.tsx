@@ -19,7 +19,7 @@ import Brightness4Icon from "@mui/icons-material/Brightness4";
 import Brightness7Icon from "@mui/icons-material/Brightness7";
 import { Link } from "react-router-dom";
 import { ColorModeContext } from "../../../App";
-import { Icon } from "@mui/material";
+import { AccountBox, ExitToApp } from "@mui/icons-material";
 
 const Search = styled("div")(({ theme }) => ({
     position: "relative",
@@ -114,27 +114,31 @@ export function Header() {
             onClose={handleMenuClose}
         >
             <Link to="/profile">
-                <MenuItem onClick={handleMenuClose}>Seu perfil</MenuItem>
+                <MenuItem onClick={handleMenuClose}>
+                    <div className="mr-1">
+                        <AccountBox />
+                    </div>
+                    Seu perfil
+                </MenuItem>
             </Link>
             <MenuItem onClick={colorMode.toggleColorMode}>
-                {/* <IconButton
-                    sx={{ mr: 1 }}
-                    onClick={colorMode.toggleColorMode}
-                    color="inherit"
-                > */}
-                <Icon sx={{ mr: 1, mb: 1, overflow: "visible" }}>
+                <div className="mr-1">
                     {theme.palette.mode === "dark" ? (
                         <Brightness7Icon />
                     ) : (
                         <Brightness4Icon />
                     )}
-                </Icon>
-                {/* </IconButton> */}
+                </div>
                 {theme.palette.mode[0].toUpperCase() +
                     theme.palette.mode.slice(1)}{" "}
                 Mode
             </MenuItem>
-            <MenuItem onClick={handleMenuClose}>Sair</MenuItem>
+            <MenuItem onClick={handleMenuClose}>
+                <div className="mr-1">
+                    <ExitToApp />
+                </div>
+                Sair
+            </MenuItem>
         </Menu>
     );
 
