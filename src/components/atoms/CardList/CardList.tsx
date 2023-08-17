@@ -21,17 +21,7 @@ export function CardListComponent({
     status,
 }: CardListComponentProps) {
     return (
-        <motion.div
-            layout
-            id={id}
-            onScroll={onScroll}
-            className={className}
-            style={{
-                display: "flex",
-                backgroundColor:
-                    status !== "success" ? "transparent" : "inherit",
-            }}
-        >
+        <motion.div layout id={id} onScroll={onScroll} className={className}>
             {status == "success" ? (
                 <Grid container spacing={1} xs={cols}>
                     {children}
@@ -68,7 +58,7 @@ export function CardListItem({ children, cols }: CardListItemProps) {
 
 function CardListLoadingState() {
     return (
-        <div className="w-full m-2 bg-gray-200 animate-pulse flex justify-center items-center">
+        <div className="w-full m-2 bg-gray-200 animate-pulse flex justify-center items-center dark:bg-neutral-800">
             <CatchingPokemonIcon
                 className="animate-spin"
                 sx={{ fontSize: 64 }}
@@ -79,7 +69,7 @@ function CardListLoadingState() {
 
 function CardListErrorState() {
     return (
-        <div className="w-full m-2 bg-gray-200 flex flex-col justify-center items-center">
+        <div className="w-full m-2 bg-gray-200 flex flex-col justify-center items-center dark:bg-neutral-800">
             <div className="relative right-6">
                 <SettingsIcon
                     sx={{ fontSize: 64 }}

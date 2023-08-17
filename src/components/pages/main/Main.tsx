@@ -1,12 +1,9 @@
-import { ThemeProvider } from "@emotion/react";
-import { Divider, Typography, createTheme } from "@mui/material";
+import { Divider, Typography } from "@mui/material";
 import { CardList } from "../../atoms/CardList/index.tsx";
 import { PokemonCard } from "../../organisms/PokemonCard";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { HeroSection } from "../../atoms/HeroSection";
-
-const defaultTheme = createTheme();
 
 export function Main() {
     const {
@@ -31,7 +28,7 @@ export function Main() {
     }
 
     return (
-        <ThemeProvider theme={defaultTheme}>
+        <>
             <HeroSection.Component>
                 <HeroSection.Title>Bem Vindo ao PokeList</HeroSection.Title>
                 <HeroSection.Description>
@@ -51,7 +48,7 @@ export function Main() {
             <CardList.Component
                 cols={12}
                 status={status}
-                className="min-h-[16rem]"
+                className="flex min-h-[16rem]"
             >
                 {data?.pages.map((group) =>
                     group.results.map((pokemon: any) => (
@@ -70,6 +67,6 @@ export function Main() {
                 ? "Load More"
                 : "Nothing more to load"}
             {isFetching && !isFetchingNextPage ? "Fetching..." : null} */}
-        </ThemeProvider>
+        </>
     );
 }

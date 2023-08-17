@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { CssBaseline } from "@mui/material";
+import { CssBaseline, ThemeProvider, createTheme } from "@mui/material";
 import { Login } from "./components/pages/login";
 import { Landing } from "./components/pages/landing";
 import { Main } from "./components/pages/main";
@@ -9,6 +9,7 @@ import Box from "@mui/material/Box";
 import { Footer } from "./components/atoms/Footer";
 import { Header } from "./components/atoms/Header";
 import { Pokedex } from "./components/pages/pokedex";
+import { useState, useMemo, createContext } from "react";
 
 // Deprecated due to react-router-dom upgrade to v6
 // function PrivateRoute({ element, path, exact = false, ...rest }) {
@@ -37,7 +38,9 @@ const queryClient = new QueryClient({
             staleTime: Infinity,
         },
     },
-}); // 12 hours of cached data
+});
+
+export const ColorModeContext = createContext({ toggleColorMode: () => {} });
 
 function Home() {
     return (
@@ -56,14 +59,50 @@ function Home() {
 }
 
 function App() {
+    const [mode, setMode] = useState<"light" | "dark">("dark");
+    const colorMode = useMemo(
+        () => ({
+            toggleColorMode: () => {
+                setMode((prevMode) =>
+                    prevMode === "light" ? "dark" : "light"
+                );
+            },
+        }),
+        []
+    );
+
+    const theme = useMemo(
+        () =>
+            createTheme({
+                palette: {
+                    mode,
+                },
+            }),
+        [mode]
+    );
+
+    if (
+        localStorage.theme === "dark" ||
+        (!("theme" in localStorage) &&
+            window.matchMedia("(prefers-color-scheme: dark)").matches)
+    ) {
+        document.documentElement.classList.add("dark");
+    } else {
+        document.documentElement.classList.remove("dark");
+    }
+
     return (
         <BrowserRouter>
-            <CssBaseline />
-            <Routes>
-                <Route path="/login" element={<Login />} />
-                <Route path="/landing" element={<Landing />} />
-                <Route path="/*" element={<Home />} />
-            </Routes>
+            <ColorModeContext.Provider value={colorMode}>
+                <ThemeProvider theme={theme}>
+                    <CssBaseline />
+                    <Routes>
+                        <Route path="/login" element={<Login />} />
+                        <Route path="/landing" element={<Landing />} />
+                        <Route path="/*" element={<Home />} />
+                    </Routes>
+                </ThemeProvider>
+            </ColorModeContext.Provider>
         </BrowserRouter>
     );
 }

@@ -101,7 +101,7 @@ export function PokemonCard({ name, url }: PokemonCardProps) {
                 <CardMedia
                     component="img"
                     sx={{ width: "8rem" }}
-                    className="bg-gray-100 rounded-full m-4"
+                    className="bg-gray-100 rounded-full m-4 dark:bg-neutral-700"
                     image={data.sprites.front_default}
                     alt="Live from space album cover"
                 />
@@ -112,13 +112,15 @@ export function PokemonCard({ name, url }: PokemonCardProps) {
 }
 
 function PokemonCardLoadingState() {
-    return <div className="w-full h-[10rem] bg-gray-200 animate-pulse"></div>;
+    return (
+        <div className="w-full h-[10rem] bg-gray-200 animate-pulse dark:bg-neutral-800"></div>
+    );
 }
 
 function PokemonCardErrorState({ error }: any) {
     console.log(error.message);
     return (
-        <div className="w-full h-[10rem] bg-gray-200 flex flex-col justify-center items-center">
+        <div className="w-full h-[10rem] bg-gray-200 flex flex-col justify-center items-center dark:bg-neutral-800">
             <p className="font-bold mt-2 text-lg text-center">
                 <span className="text-red-600">Houve um problema</span>
                 <br />

@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { styled, alpha } from "@mui/material/styles";
+import { useContext, useState } from "react";
+import { styled, alpha, useTheme } from "@mui/material/styles";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -15,7 +15,11 @@ import NotificationsIcon from "@mui/icons-material/Notifications";
 import MoreIcon from "@mui/icons-material/MoreVert";
 import MenuIcon from "@mui/icons-material/Menu";
 import Button from "@mui/material/Button";
+import Brightness4Icon from "@mui/icons-material/Brightness4";
+import Brightness7Icon from "@mui/icons-material/Brightness7";
 import { Link } from "react-router-dom";
+import { ColorModeContext } from "../../../App";
+import { Icon } from "@mui/material";
 
 const Search = styled("div")(({ theme }) => ({
     position: "relative",
@@ -61,6 +65,8 @@ export function Header() {
     const [anchorEl, setAnchorEl] = useState(null);
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
     const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
+    const theme = useTheme();
+    const colorMode = useContext(ColorModeContext);
 
     const isMenuOpen = Boolean(anchorEl);
     const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -110,9 +116,24 @@ export function Header() {
             <Link to="/profile">
                 <MenuItem onClick={handleMenuClose}>Seu perfil</MenuItem>
             </Link>
-            <Link to="/config">
-                <MenuItem onClick={handleMenuClose}>Configurações</MenuItem>
-            </Link>
+            <MenuItem onClick={colorMode.toggleColorMode}>
+                {/* <IconButton
+                    sx={{ mr: 1 }}
+                    onClick={colorMode.toggleColorMode}
+                    color="inherit"
+                > */}
+                <Icon sx={{ mr: 1, mb: 1, overflow: "visible" }}>
+                    {theme.palette.mode === "dark" ? (
+                        <Brightness7Icon />
+                    ) : (
+                        <Brightness4Icon />
+                    )}
+                </Icon>
+                {/* </IconButton> */}
+                {theme.palette.mode[0].toUpperCase() +
+                    theme.palette.mode.slice(1)}{" "}
+                Mode
+            </MenuItem>
             <MenuItem onClick={handleMenuClose}>Sair</MenuItem>
         </Menu>
     );
@@ -234,7 +255,7 @@ export function Header() {
 
     return (
         <Box sx={{ flexGrow: 1 }}>
-            <AppBar position="static">
+            <AppBar position="static" color="default" enableColorOnDark={true}>
                 <Toolbar>
                     <Typography
                         variant="h6"

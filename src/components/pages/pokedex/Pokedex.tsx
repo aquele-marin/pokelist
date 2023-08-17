@@ -41,7 +41,7 @@ export function Pokedex() {
             cols={12}
             id="list"
             // className="bg-gray-300 rounded-sm m-16 h-[48rem] overflow-scroll"
-            className="overflow-scroll h-[48rem] m-16 rounded-sm bg-gray-300"
+            className="flex overflow-scroll h-[48rem] m-16 rounded-sm"
             onScroll={handleScroll}
             status={status}
         >
