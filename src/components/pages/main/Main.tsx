@@ -61,12 +61,6 @@ export function Main() {
                     ))
                 )}
             </CardList.Component>
-            {/* {isFetchingNextPage
-                ? "Loading more..."
-                : hasNextPage
-                ? "Load More"
-                : "Nothing more to load"}
-            {isFetching && !isFetchingNextPage ? "Fetching..." : null} */}
         </>
     );
 }
