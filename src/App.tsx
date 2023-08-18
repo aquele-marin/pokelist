@@ -111,7 +111,6 @@ function App() {
         <BrowserRouter>
             <ColorModeContext.Provider value={colorMode}>
                 <ThemeProvider theme={theme}>
-                    <CssBaseline />
                     <Routes>
                         <Route path="/login" element={<Login />} />
                         <Route path="/landing" element={<Landing />} />

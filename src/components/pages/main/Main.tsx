@@ -38,7 +38,7 @@ export function Main() {
             </HeroSection.Component>
             <Divider />
             <Typography
-                className="flex justify-center"
+                className="flex justify-center bg-neutral-900"
                 variant="h2"
                 component="h2"
             >
@@ -48,7 +48,7 @@ export function Main() {
             <CardList.Component
                 cols={12}
                 status={status}
-                className="flex min-h-[16rem]"
+                className="flex min-h-[16rem] bg-neutral-900"
             >
                 {data?.pages.map((group) =>
                     group.results.map((pokemon: any) => (

@@ -1,322 +1,116 @@
-import { useContext, useState } from "react";
-import { styled, alpha, useTheme } from "@mui/material/styles";
-import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
-import Toolbar from "@mui/material/Toolbar";
-import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
-import InputBase from "@mui/material/InputBase";
-import Badge from "@mui/material/Badge";
-import MenuItem from "@mui/material/MenuItem";
-import Menu from "@mui/material/Menu";
-import SearchIcon from "@mui/icons-material/Search";
-import AccountCircle from "@mui/icons-material/AccountCircle";
-import NotificationsIcon from "@mui/icons-material/Notifications";
-import MoreIcon from "@mui/icons-material/MoreVert";
-import MenuIcon from "@mui/icons-material/Menu";
-import Button from "@mui/material/Button";
-import Brightness4Icon from "@mui/icons-material/Brightness4";
-import Brightness7Icon from "@mui/icons-material/Brightness7";
-import { Link } from "react-router-dom";
-import { ColorModeContext } from "../../../App";
-import { AccountBox, ExitToApp } from "@mui/icons-material";
-
-const Search = styled("div")(({ theme }) => ({
-    position: "relative",
-    borderRadius: theme.shape.borderRadius,
-    backgroundColor: alpha(theme.palette.common.white, 0.15),
-    "&:hover": {
-        backgroundColor: alpha(theme.palette.common.white, 0.25),
-    },
-    marginRight: theme.spacing(2),
-    marginLeft: 0,
-    width: "100%",
-    [theme.breakpoints.up("sm")]: {
-        marginLeft: theme.spacing(3),
-        width: "auto",
-    },
-}));
-
-const SearchIconWrapper = styled("div")(({ theme }) => ({
-    padding: theme.spacing(0, 2),
-    height: "100%",
-    position: "absolute",
-    pointerEvents: "none",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-}));
-
-const StyledInputBase = styled(InputBase)(({ theme }) => ({
-    color: "inherit",
-    "& .MuiInputBase-input": {
-        padding: theme.spacing(1, 1, 1, 0),
-        // vertical padding + font size from searchIcon
-        paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-        transition: theme.transitions.create("width"),
-        width: "100%",
-        [theme.breakpoints.up("md")]: {
-            width: "20ch",
-        },
-    },
-}));
-
 export function Header() {
-    const [anchorEl, setAnchorEl] = useState(null);
-    const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
-    const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
-    const theme = useTheme();
-    const colorMode = useContext(ColorModeContext);
-
-    const isMenuOpen = Boolean(anchorEl);
-    const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
-
-    const handleProfileMenuOpen = (event: any) => {
-        setAnchorEl(event.currentTarget);
-    };
-
-    const handleMobileMenuClose = () => {
-        setMobileMoreAnchorEl(null);
-    };
-
-    const handleMenuClose = () => {
-        setAnchorEl(null);
-        handleMobileMenuClose();
-    };
-
-    const handleMobileMenuOpen = (event: any) => {
-        setMobileMoreAnchorEl(event.currentTarget);
-    };
-
-    const handleCloseNavMenu = () => {
-        setAnchorElNav(null);
-    };
-
-    const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
-        setAnchorElNav(event.currentTarget);
-    };
-
-    const menuId = "primary-search-account-menu";
-    const renderMenu = (
-        <Menu
-            anchorEl={anchorEl}
-            anchorOrigin={{
-                vertical: "bottom",
-                horizontal: "right",
-            }}
-            id={menuId}
-            keepMounted
-            transformOrigin={{
-                vertical: "top",
-                horizontal: "right",
-            }}
-            open={isMenuOpen}
-            onClose={handleMenuClose}
-        >
-            <Link to="/profile">
-                <MenuItem onClick={handleMenuClose}>
-                    <div className="mr-1">
-                        <AccountBox />
-                    </div>
-                    Seu perfil
-                </MenuItem>
-            </Link>
-            <MenuItem onClick={colorMode.toggleColorMode}>
-                <div className="mr-1">
-                    {theme.palette.mode === "dark" ? (
-                        <Brightness7Icon />
-                    ) : (
-                        <Brightness4Icon />
-                    )}
-                </div>
-                {theme.palette.mode[0].toUpperCase() +
-                    theme.palette.mode.slice(1)}{" "}
-                Mode
-            </MenuItem>
-            <MenuItem onClick={handleMenuClose}>
-                <div className="mr-1">
-                    <ExitToApp />
-                </div>
-                Sair
-            </MenuItem>
-        </Menu>
-    );
-
-    const mobileMenuId = "primary-search-account-menu-mobile";
-    const renderMobileMenu = (
-        <Menu
-            anchorEl={mobileMoreAnchorEl}
-            anchorOrigin={{
-                vertical: "top",
-                horizontal: "right",
-            }}
-            id={mobileMenuId}
-            keepMounted
-            transformOrigin={{
-                vertical: "top",
-                horizontal: "right",
-            }}
-            open={isMobileMenuOpen}
-            onClose={handleMobileMenuClose}
-        >
-            <MenuItem>
-                <IconButton
-                    size="large"
-                    aria-label="show 17 new notifications"
-                    color="inherit"
+    const renderMobileMenu = () => (
+        <div className="dropdown">
+            <label tabIndex={0} className="btn btn-ghost lg:hidden">
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-5 w-5"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
                 >
-                    <Badge badgeContent={0} color="error">
-                        <NotificationsIcon />
-                    </Badge>
-                </IconButton>
-                <p>Notificações</p>
-            </MenuItem>
-            <MenuItem onClick={handleProfileMenuOpen}>
-                <IconButton
-                    size="large"
-                    aria-label="account of current user"
-                    aria-controls="primary-search-account-menu"
-                    aria-haspopup="true"
-                    color="inherit"
-                >
-                    <AccountCircle />
-                </IconButton>
-                <p>Sua conta</p>
-            </MenuItem>
-        </Menu>
-    );
-
-    const renderNavLinks = (
-        <Box
-            sx={{
-                flexGrow: 1,
-                display: { xs: "none", md: "flex" },
-            }}
-        >
-            <Link to="/pokedex">
-                <Button
-                    onClick={handleCloseNavMenu}
-                    sx={{
-                        my: 2,
-                        display: "block",
-                    }}
-                >
-                    <p className="text-black dark:text-white">Pokedex</p>
-                </Button>
-            </Link>
-        </Box>
-    );
-
-    const renderMobileNavLinks = (
-        <Box
-            sx={{
-                flexGrow: 1,
-                display: { xs: "flex", md: "none" },
-            }}
-        >
-            <IconButton
-                size="large"
-                aria-label="account of current user"
-                aria-controls="menu-appbar"
-                aria-haspopup="true"
-                onClick={handleOpenNavMenu}
-                color="inherit"
+                    <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M4 6h16M4 12h8m-8 6h16"
+                    />
+                </svg>
+            </label>
+            <ul
+                tabIndex={0}
+                className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
             >
-                <MenuIcon />
-            </IconButton>
-            <Menu
-                id="menu-appbar"
-                anchorEl={anchorElNav}
-                anchorOrigin={{
-                    vertical: "bottom",
-                    horizontal: "left",
-                }}
-                keepMounted
-                transformOrigin={{
-                    vertical: "top",
-                    horizontal: "left",
-                }}
-                open={Boolean(anchorElNav)}
-                onClose={handleCloseNavMenu}
-                sx={{
-                    display: { xs: "block", md: "none" },
-                }}
-            >
-                <Link to="/">
-                    <MenuItem onClick={handleCloseNavMenu}>
-                        <Typography textAlign="center">Home</Typography>
-                    </MenuItem>
-                </Link>
-                <Link to="/pokedex">
-                    <MenuItem onClick={handleCloseNavMenu}>
-                        <Typography textAlign="center">Pokedex</Typography>
-                    </MenuItem>
-                </Link>
-            </Menu>
-        </Box>
+                <li>
+                    <a>Item 1</a>
+                </li>
+                <li>
+                    <a>Parent</a>
+                    <ul className="p-2">
+                        <li>
+                            <a>Submenu 1</a>
+                        </li>
+                        <li>
+                            <a>Submenu 2</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a>Item 3</a>
+                </li>
+            </ul>
+        </div>
+    );
+
+    const renderMenu = () => (
+        <div className="hidden lg:flex">
+            <ul className="menu menu-horizontal px-1">
+                <li>
+                    <a>Item 1</a>
+                </li>
+                <li tabIndex={0}>
+                    <details>
+                        <summary>Parent</summary>
+                        <ul className="p-2">
+                            <li>
+                                <a>Submenu 1</a>
+                            </li>
+                            <li>
+                                <a>Submenu 2</a>
+                            </li>
+                        </ul>
+                    </details>
+                </li>
+                <li>
+                    <a>Item 3</a>
+                </li>
+            </ul>
+        </div>
     );
 
     return (
-        <Box sx={{ flexGrow: 1 }}>
-            <AppBar position="static" color="default" enableColorOnDark={true}>
-                <Toolbar>
-                    <Typography
-                        variant="h6"
-                        noWrap
-                        component="div"
-                        sx={{ display: { xs: "none", sm: "block" } }}
+        <div className="navbar bg-base-100">
+            <div className="navbar-start">
+                {renderMobileMenu()}
+                <a className="btn btn-ghost normal-case text-xl">PokeList</a>
+                {renderMenu()}
+            </div>
+            <div className="navbar-end flex-none gap-2">
+                <div className="form-control">
+                    <input
+                        type="text"
+                        placeholder="Search"
+                        className="input input-bordered w-24 md:w-auto"
+                    />
+                </div>
+                <div className="dropdown dropdown-end">
+                    <label
+                        tabIndex={0}
+                        className="btn btn-ghost btn-circle avatar"
                     >
-                        <Link to="/">PokeList</Link>
-                    </Typography>
-                    <Search>
-                        <SearchIconWrapper>
-                            <SearchIcon />
-                        </SearchIconWrapper>
-                        <StyledInputBase
-                            placeholder="Search…"
-                            inputProps={{ "aria-label": "search" }}
-                        />
-                    </Search>
-                    {renderNavLinks}
-                    {renderMobileNavLinks}
-                    <Box sx={{ display: { xs: "none", md: "flex" } }}>
-                        <IconButton
-                            size="large"
-                            aria-label="show new notifications"
-                            color="inherit"
-                        >
-                            <Badge badgeContent={0} color="error">
-                                <NotificationsIcon />
-                            </Badge>
-                        </IconButton>
-                        <IconButton
-                            size="large"
-                            edge="end"
-                            aria-label="account of current user"
-                            aria-controls={menuId}
-                            aria-haspopup="true"
-                            onClick={handleProfileMenuOpen}
-                            color="inherit"
-                        >
-                            <AccountCircle />
-                        </IconButton>
-                    </Box>
-                    <Box sx={{ display: { xs: "flex", md: "none" } }}>
-                        <IconButton
-                            size="large"
-                            aria-label="show more"
-                            aria-controls={mobileMenuId}
-                            aria-haspopup="true"
-                            onClick={handleMobileMenuOpen}
-                            color="inherit"
-                        >
-                            <MoreIcon />
-                        </IconButton>
-                    </Box>
-                </Toolbar>
-            </AppBar>
-            {renderMobileMenu}
-            {renderMenu}
-        </Box>
+                        <div className="w-10 rounded-full">
+                            <img src="/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+                        </div>
+                    </label>
+                    <ul
+                        tabIndex={0}
+                        className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52"
+                    >
+                        <li>
+                            <a className="justify-between">
+                                Profile
+                                <span className="badge">New</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a>Settings</a>
+                        </li>
+                        <li>
+                            <a>Logout</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
     );
 }
