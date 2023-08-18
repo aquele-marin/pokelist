@@ -1,5 +1,5 @@
 import { Modal } from "../../atoms/Modal";
-import { Chip, Button } from "@mui/material";
+import { Chip, Button, useTheme } from "@mui/material";
 import {
     Chart,
     RadialLinearScale,
@@ -8,6 +8,16 @@ import {
     Filler,
     Tooltip,
     Legend,
+    ChartData,
+    Colors,
+    CoreChartOptions,
+    PluginChartOptions,
+    BubbleDataPoint,
+    ChartEvent,
+    ChartTypeRegistry,
+    LegendElement,
+    LegendItem,
+    Point,
 } from "chart.js";
 import { Radar } from "react-chartjs-2";
 import { PokemonData } from "../../../types/PokeAPI";
@@ -18,7 +28,8 @@ Chart.register(
     LineElement,
     Filler,
     Tooltip,
-    Legend
+    Legend,
+    Colors
 );
 
 interface PokemonModalProps {
@@ -28,8 +39,9 @@ interface PokemonModalProps {
 }
 
 export function PokemonModal({ data, open, handleClose }: PokemonModalProps) {
+    const theme = useTheme();
     const pokemonName = data.name[0].toUpperCase() + data.name.slice(1);
-    const pokemonStats = {
+    const pokemonStats: ChartData<"radar", number[], string> = {
         labels: data.stats.map(
             (stat) => stat.stat.name[0].toUpperCase() + stat.stat.name.slice(1)
         ),
@@ -37,15 +49,28 @@ export function PokemonModal({ data, open, handleClose }: PokemonModalProps) {
             {
                 label: pokemonName,
                 data: data.stats.map((stat) => stat.base_stat),
-                backgroundColor: "rgba(255, 99, 132, 0.2)",
-                borderColor: "rgba(255, 99, 132, 1)",
+                backgroundColor:
+                    theme.palette.mode === "dark"
+                        ? "rgba(255, 99, 132, 0.2)"
+                        : "rgba(255, 99, 132, 0.5)",
+                borderColor:
+                    theme.palette.mode === "dark"
+                        ? "rgba(255, 99, 132, 1)"
+                        : "rgba(255, 99, 132, 0.5)",
                 borderWidth: 1,
             },
         ],
     };
     const options = {
         responsive: true,
-        plugins: { legend: undefined },
+        plugins: {
+            legend: {
+                display: false,
+            },
+            colors: {
+                enabled: true,
+            },
+        },
         scales: {
             r: {
                 min: 0,

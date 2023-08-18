@@ -25,8 +25,8 @@ export function Profile() {
     }
 
     return (
-        <div className="min-h-[85vh] bg-gray-100 flex justify-center items-center">
-            <div className="bg-gray-200 w-[48rem] h-[32rem] shadow flex justify-between items-center flex-col p-20">
+        <div className="min-h-[85vh] bg-gray-100 flex justify-center items-center dark:bg-neutral-900">
+            <div className="bg-gray-200 w-[48rem] h-[32rem] shadow flex justify-between items-center flex-col p-20 dark:bg-neutral-800">
                 <Avatar
                     alt="Profile picture"
                     sx={{ width: "4rem", height: "4rem", bgcolor: "#cc0000" }}

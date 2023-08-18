@@ -198,11 +198,10 @@ export function Header() {
                     onClick={handleCloseNavMenu}
                     sx={{
                         my: 2,
-                        color: "white",
                         display: "block",
                     }}
                 >
-                    Pokedex
+                    <p className="text-black dark:text-white">Pokedex</p>
                 </Button>
             </Link>
         </Box>

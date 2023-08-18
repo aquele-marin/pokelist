@@ -1,5 +1,10 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { CssBaseline, ThemeProvider, createTheme } from "@mui/material";
+import {
+    CssBaseline,
+    ThemeProvider,
+    createTheme,
+    useMediaQuery,
+} from "@mui/material";
 import { Login } from "./components/pages/login";
 import { Landing } from "./components/pages/landing";
 import { Main } from "./components/pages/main";
@@ -9,7 +14,7 @@ import Box from "@mui/material/Box";
 import { Footer } from "./components/atoms/Footer";
 import { Header } from "./components/atoms/Header";
 import { Pokedex } from "./components/pages/pokedex";
-import { useState, useMemo, createContext } from "react";
+import { useState, useMemo, createContext, useEffect } from "react";
 
 // Deprecated due to react-router-dom upgrade to v6
 // function PrivateRoute({ element, path, exact = false, ...rest }) {
@@ -59,7 +64,14 @@ function Home() {
 }
 
 function App() {
-    const [mode, setMode] = useState<"light" | "dark">("dark");
+    const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
+    const [mode, setMode] = useState<"light" | "dark">(
+        localStorage.theme !== undefined
+            ? localStorage.theme
+            : prefersDarkMode
+            ? "dark"
+            : "light"
+    );
     const colorMode = useMemo(
         () => ({
             toggleColorMode: () => {
@@ -81,15 +93,19 @@ function App() {
         [mode]
     );
 
-    if (
-        localStorage.theme === "dark" ||
-        (!("theme" in localStorage) &&
-            window.matchMedia("(prefers-color-scheme: dark)").matches)
-    ) {
-        document.documentElement.classList.add("dark");
-    } else {
-        document.documentElement.classList.remove("dark");
-    }
+    useEffect(() => {
+        if (!("theme" in localStorage)) {
+            localStorage.theme = mode;
+        }
+
+        if (mode === "dark") {
+            localStorage.theme = "dark";
+            document.documentElement.classList.add("dark");
+        } else {
+            localStorage.theme = "light";
+            document.documentElement.classList.remove("dark");
+        }
+    }, [mode]);
 
     return (
         <BrowserRouter>
