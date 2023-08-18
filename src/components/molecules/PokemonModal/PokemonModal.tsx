@@ -10,14 +10,6 @@ import {
     Legend,
     ChartData,
     Colors,
-    CoreChartOptions,
-    PluginChartOptions,
-    BubbleDataPoint,
-    ChartEvent,
-    ChartTypeRegistry,
-    LegendElement,
-    LegendItem,
-    Point,
 } from "chart.js";
 import { Radar } from "react-chartjs-2";
 import { PokemonData } from "../../../types/PokeAPI";
