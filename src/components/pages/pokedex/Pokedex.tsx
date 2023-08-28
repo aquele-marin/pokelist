@@ -37,7 +37,7 @@ export function Pokedex() {
     }
 
     return (
-        <CardList.Component
+        <CardList
             cols={12}
             id="list"
             // className="bg-gray-300 rounded-sm m-16 h-[48rem] overflow-scroll"
@@ -52,7 +52,7 @@ export function Pokedex() {
                     </CardList.Item>
                 ))
             )}
-        </CardList.Component>
+        </CardList>
     );
 }
 

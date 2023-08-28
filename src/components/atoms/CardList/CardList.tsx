@@ -12,14 +12,14 @@ interface CardListComponentProps {
     onScroll?: () => void;
 }
 
-export function CardListComponent({
+const CardList = ({
     children,
     cols,
     id,
     className,
     onScroll,
     status,
-}: CardListComponentProps) {
+}: CardListComponentProps) => {
     return (
         <motion.div layout id={id} onScroll={onScroll} className={className}>
             {status == "success" ? (
@@ -33,14 +33,14 @@ export function CardListComponent({
             )}
         </motion.div>
     );
-}
+};
 
 interface CardListItemProps {
     children: React.ReactNode;
     cols: number;
 }
 
-export function CardListItem({ children, cols }: CardListItemProps) {
+CardList.Item = ({ children, cols }: CardListItemProps) => {
     return (
         <Grid item xs={cols}>
             <motion.div
@@ -54,7 +54,7 @@ export function CardListItem({ children, cols }: CardListItemProps) {
             </motion.div>
         </Grid>
     );
-}
+};
 
 function CardListLoadingState() {
     return (
@@ -89,3 +89,5 @@ function CardListErrorState() {
         </div>
     );
 }
+
+export { CardList };

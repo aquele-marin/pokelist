@@ -1,4 +1,4 @@
-import { Modal } from "@mui/material";
+import { Modal as MuiModal } from "@mui/material";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 
@@ -8,13 +8,9 @@ interface ModalComponentProps {
     children: React.ReactNode;
 }
 
-export function ModalComponent({
-    open,
-    handleClose,
-    children,
-}: ModalComponentProps) {
+const Modal = ({ open, handleClose, children }: ModalComponentProps) => {
     return (
-        <Modal
+        <MuiModal
             open={open}
             onClose={handleClose}
             aria-labelledby="modal-modal-title"
@@ -23,35 +19,35 @@ export function ModalComponent({
             <Box className="grid gap-2 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white rounded-md  shadow-lg p-4 dark:bg-neutral-800">
                 {children}
             </Box>
-        </Modal>
+        </MuiModal>
     );
-}
+};
 
 interface ModalContentProps {
     children: React.ReactNode;
 }
 
-export function ModalContent({ children }: ModalContentProps) {
+Modal.Content = ({ children }: ModalContentProps) => {
     return <Box>{children}</Box>;
-}
+};
 
 interface ModalTitleProps {
     children: React.ReactNode;
 }
 
-export function ModalTitle({ children }: ModalTitleProps) {
+Modal.Title = ({ children }: ModalTitleProps) => {
     return (
         <Typography id="modal-modal-title" variant="h4" component="h2">
             {children}
         </Typography>
     );
-}
+};
 
 interface ModalMediaProps {
     url: string;
 }
 
-export function ModalMedia({ url }: ModalMediaProps) {
+Modal.Media = ({ url }: ModalMediaProps) => {
     return (
         <img
             src={url}
@@ -59,24 +55,26 @@ export function ModalMedia({ url }: ModalMediaProps) {
             className="w-64 h-full object-contain bg-gray-200 rounded-lg dark:bg-neutral-700"
         />
     );
-}
+};
 
 interface ModalButtonsProps {
     children: React.ReactNode;
 }
 
-export function ModalButtons({ children }: ModalButtonsProps) {
+Modal.Buttons = ({ children }: ModalButtonsProps) => {
     return <Box className=" flex justify-end col-span-2">{children}</Box>;
-}
+};
 
 interface ModalDescriptionProps {
     children: React.ReactNode;
 }
 
-export function ModalDescription({ children }: ModalDescriptionProps) {
+Modal.Description = ({ children }: ModalDescriptionProps) => {
     return (
         <Typography id="modal-modal-description" sx={{ mt: 2 }}>
             {children}
         </Typography>
     );
-}
+};
+
+export { Modal };

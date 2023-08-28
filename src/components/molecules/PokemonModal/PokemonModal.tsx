@@ -71,7 +71,7 @@ export function PokemonModal({ data, open, handleClose }: PokemonModalProps) {
     };
 
     return (
-        <Modal.Component open={open} handleClose={handleClose}>
+        <Modal open={open} handleClose={handleClose}>
             <Modal.Content>
                 <Modal.Title>{pokemonName}</Modal.Title>
                 {data.types.map((type, i) => (
@@ -95,6 +95,6 @@ export function PokemonModal({ data, open, handleClose }: PokemonModalProps) {
             <Modal.Buttons>
                 <Button onClick={handleClose}>Fechar</Button>
             </Modal.Buttons>
-        </Modal.Component>
+        </Modal>
     );
 }

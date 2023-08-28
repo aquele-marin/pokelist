@@ -29,13 +29,13 @@ export function Main() {
 
     return (
         <>
-            <HeroSection.Component>
+            <HeroSection>
                 <HeroSection.Title>Bem Vindo ao PokeList</HeroSection.Title>
                 <HeroSection.Description>
                     Confira seus pokemons favoritos e suas informações!! Entre
                     na aba Pokedex para favoritar e visualizar novos pokemons!
                 </HeroSection.Description>
-            </HeroSection.Component>
+            </HeroSection>
             <Divider />
             <Typography
                 className="flex justify-center bg-neutral-900"
@@ -45,7 +45,7 @@ export function Main() {
                 Favoritos
             </Typography>
             <Divider />
-            <CardList.Component
+            <CardList
                 cols={12}
                 status={status}
                 className="flex min-h-[16rem] bg-neutral-900"
@@ -60,7 +60,7 @@ export function Main() {
                         </CardList.Item>
                     ))
                 )}
-            </CardList.Component>
+            </CardList>
         </>
     );
 }
