@@ -7,7 +7,6 @@ import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-import Tooltip from "@mui/material/Tooltip";
 import Chip from "@mui/material/Chip";
 import InfoIcon from "@mui/icons-material/Info";
 import axios from "axios";
@@ -55,12 +54,17 @@ export function PokemonCard({ name, url }: PokemonCardProps) {
             sx={{
                 display: "flex",
                 justifyContent: "space-between",
+                overflow: "visible",
             }}
         >
-            <Box className="flex justify-between w-full">
+            <Box className="flex justify-between w-full bg-base-200">
                 <Box className="flex flex-col justify-between m-2">
                     <CardContent className="flex flex-col">
-                        <Typography component="div" variant="h5">
+                        <Typography
+                            component="div"
+                            variant="h5"
+                            className="text-base-content dark:text-base-100"
+                        >
                             {pokemonName}
                         </Typography>
                         <Box>
@@ -71,7 +75,11 @@ export function PokemonCard({ name, url }: PokemonCardProps) {
                                         type.type.name.slice(1)
                                     }
                                     variant="outlined"
+                                    sx={{
+                                        color: "hsl(var(--bc) / var(--tw-text-opacity))",
+                                    }}
                                     key={i.toString()}
+                                    className="text-base-content dark:text-base-100"
                                 />
                             ))}
                         </Box>
@@ -82,26 +90,26 @@ export function PokemonCard({ name, url }: PokemonCardProps) {
                             alignItems: "center",
                         }}
                     >
-                        <Tooltip title="Informações">
+                        <div className="tooltip" data-tip="Informações">
                             <IconButton aria-label="info" onClick={handleOpen}>
-                                <InfoIcon />
+                                <InfoIcon className="text-base-content dark:text-base-100" />
                             </IconButton>
-                        </Tooltip>
-                        <Tooltip title="Favoritar">
+                        </div>
+                        <div className="tooltip" data-tip="Favoritar">
                             <IconButton aria-label="favorite">
                                 {isFavorite() ? (
-                                    <FavoriteIcon />
+                                    <FavoriteIcon className="text-base-content" />
                                 ) : (
-                                    <FavoriteBorderIcon />
+                                    <FavoriteBorderIcon className="text-base-content" />
                                 )}
                             </IconButton>
-                        </Tooltip>
+                        </div>
                     </Box>
                 </Box>
                 <CardMedia
                     component="img"
                     sx={{ width: "8rem" }}
-                    className="bg-gray-100 rounded-full m-4 dark:bg-neutral-700"
+                    className="bg-base-300 rounded-full m-4"
                     image={data.sprites.front_default}
                     alt="Live from space album cover"
                 />
@@ -112,15 +120,13 @@ export function PokemonCard({ name, url }: PokemonCardProps) {
 }
 
 function PokemonCardLoadingState() {
-    return (
-        <div className="w-full h-[10rem] bg-gray-200 animate-pulse dark:bg-neutral-800"></div>
-    );
+    return <div className="w-full h-[10rem] bg-base-300 animate-pulse"></div>;
 }
 
 function PokemonCardErrorState({ error }: any) {
     console.log(error.message);
     return (
-        <div className="w-full h-[10rem] bg-gray-200 flex flex-col justify-center items-center dark:bg-neutral-800">
+        <div className="w-full h-[10rem] bg-base-200 flex flex-col justify-center items-center">
             <p className="font-bold mt-2 text-lg text-center">
                 <span className="text-red-600">Houve um problema</span>
                 <br />

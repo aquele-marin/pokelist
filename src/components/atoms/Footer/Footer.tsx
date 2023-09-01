@@ -16,11 +16,12 @@ export function Footer({ children }: FooterProps) {
                     py: 3,
                     px: 2,
                     mt: "auto",
-                    backgroundColor: (theme) =>
-                        theme.palette.mode === "light"
-                            ? theme.palette.grey[200]
-                            : theme.palette.grey[800],
+                    // backgroundColor: (theme) =>
+                    //     theme.palette.mode === "light"
+                    //         ? theme.palette.grey[200]
+                    //         : theme.palette.grey[800],
                 }}
+                className="bg-base-200"
             >
                 <Container maxWidth="sm">
                     <Typography variant="body1">{children}</Typography>

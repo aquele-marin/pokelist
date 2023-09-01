@@ -9,7 +9,7 @@ import Box from "@mui/material/Box";
 import { Footer } from "./components/atoms/Footer";
 import { Header } from "./components/atoms/Header";
 import { Pokedex } from "./components/pages/pokedex";
-import { useState, useMemo, createContext, useEffect } from "react";
+import { createContext } from "react";
 
 // Deprecated due to react-router-dom upgrade to v6
 // function PrivateRoute({ element, path, exact = false, ...rest }) {

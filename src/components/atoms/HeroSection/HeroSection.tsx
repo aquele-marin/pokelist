@@ -10,11 +10,12 @@ interface HeroSectionComponentProps {
 const HeroSection = ({ children }: HeroSectionComponentProps) => {
     return (
         <Box
-            sx={{
-                bgcolor: "background.paper",
-                pt: 8,
-                pb: 6,
-            }}
+            // sx={{
+            //     bgcolor: "background.paper",
+            //     pt: 8,
+            //     pb: 6,
+            // }}
+            className="pt-8 pb-6 bg-base-200"
         >
             <Container maxWidth="sm">
                 {children}
@@ -61,7 +62,7 @@ HeroSection.Title = ({ children }: HeroSectionTitleProps) => {
             component="h1"
             variant="h2"
             align="center"
-            color="text.primary"
+            className="text-base-content dark:text-base-100"
             gutterBottom
         >
             {children}
@@ -78,7 +79,7 @@ HeroSection.Description = ({ children }: HeroSectionDescriptionProps) => {
         <Typography
             variant="h5"
             align="center"
-            color="text.secondary"
+            className="text-base-content dark:text-base-100"
             paragraph
         >
             {children}

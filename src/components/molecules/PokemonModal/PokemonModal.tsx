@@ -1,5 +1,4 @@
 import { Modal } from "../../atoms/Modal";
-import { Chip, Button, useTheme } from "@mui/material";
 import {
     Chart,
     RadialLinearScale,
@@ -13,6 +12,7 @@ import {
 } from "chart.js";
 import { Radar } from "react-chartjs-2";
 import { PokemonData } from "../../../types/PokeAPI";
+import { Chip } from "../../atoms/Badges";
 
 Chart.register(
     RadialLinearScale,
@@ -31,7 +31,6 @@ interface PokemonModalProps {
 }
 
 export function PokemonModal({ data, open, handleClose }: PokemonModalProps) {
-    const theme = useTheme();
     const pokemonName = data.name[0].toUpperCase() + data.name.slice(1);
     const pokemonStats: ChartData<"radar", number[], string> = {
         labels: data.stats.map(
@@ -41,14 +40,8 @@ export function PokemonModal({ data, open, handleClose }: PokemonModalProps) {
             {
                 label: pokemonName,
                 data: data.stats.map((stat) => stat.base_stat),
-                backgroundColor:
-                    theme.palette.mode === "dark"
-                        ? "rgba(255, 99, 132, 0.2)"
-                        : "rgba(255, 99, 132, 0.5)",
-                borderColor:
-                    theme.palette.mode === "dark"
-                        ? "rgba(255, 99, 132, 1)"
-                        : "rgba(255, 99, 132, 0.5)",
+                backgroundColor: "rgba(255, 99, 132, 0.2)",
+                borderColor: "rgba(255, 99, 132, 1)",
                 borderWidth: 1,
             },
         ],
@@ -74,17 +67,15 @@ export function PokemonModal({ data, open, handleClose }: PokemonModalProps) {
         <Modal open={open} handleClose={handleClose}>
             <Modal.Content>
                 <Modal.Title>{pokemonName}</Modal.Title>
-                {data.types.map((type, i) => (
-                    <Chip
-                        label={
-                            type.type.name[0].toUpperCase() +
-                            type.type.name.slice(1)
-                        }
-                        variant="outlined"
-                        className="mr-1"
-                        key={i.toString()}
-                    />
-                ))}
+                <div className="flex gap-2">
+                    {data.types.map((type) => (
+                        <Chip key={type.type.name}>
+                            {type.type.name[0].toUpperCase() +
+                                type.type.name.slice(1)}
+                        </Chip>
+                    ))}
+                </div>
+
                 <Radar
                     options={options}
                     data={pokemonStats}
@@ -93,7 +84,9 @@ export function PokemonModal({ data, open, handleClose }: PokemonModalProps) {
             </Modal.Content>
             <Modal.Media url={data.sprites.front_default} />
             <Modal.Buttons>
-                <Button onClick={handleClose}>Fechar</Button>
+                <button className="btn" onClick={handleClose}>
+                    Fechar
+                </button>
             </Modal.Buttons>
         </Modal>
     );

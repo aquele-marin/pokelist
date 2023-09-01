@@ -58,7 +58,7 @@ CardList.Item = ({ children, cols }: CardListItemProps) => {
 
 function CardListLoadingState() {
     return (
-        <div className="w-full m-2 bg-gray-200 animate-pulse flex justify-center items-center dark:bg-neutral-800">
+        <div className="w-full m-2 bg-base-300 animate-pulse flex justify-center items-center">
             <CatchingPokemonIcon
                 className="animate-spin"
                 sx={{ fontSize: 64 }}
@@ -69,7 +69,7 @@ function CardListLoadingState() {
 
 function CardListErrorState() {
     return (
-        <div className="w-full m-2 bg-gray-200 flex flex-col justify-center items-center dark:bg-neutral-800">
+        <div className="w-full m-2 bg-base-200 flex flex-col justify-center items-center">
             <div className="relative right-6">
                 <SettingsIcon
                     sx={{ fontSize: 64 }}

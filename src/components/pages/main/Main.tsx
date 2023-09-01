@@ -38,18 +38,14 @@ export function Main() {
             </HeroSection>
             <Divider />
             <Typography
-                className="flex justify-center bg-neutral-900"
+                className="flex justify-center"
                 variant="h2"
                 component="h2"
             >
                 Favoritos
             </Typography>
             <Divider />
-            <CardList
-                cols={12}
-                status={status}
-                className="flex min-h-[16rem] bg-neutral-900"
-            >
+            <CardList cols={12} status={status} className="flex min-h-[16rem]">
                 {data?.pages.map((group) =>
                     group.results.map((pokemon: any) => (
                         <CardList.Item cols={4} key={pokemon.url}>
